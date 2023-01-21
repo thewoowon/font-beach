@@ -24,8 +24,8 @@ export default function Header() {
 
   return (
     <header
-      className="bg-white"
-      style={{ borderBottom: '0.5px solid rgba(240,240,240,0.8)' }}
+      className="bg-white fixed top-0 left-0 right-0 z-50"
+      style={{ borderBottom: '0.5px solid #3f7cf7' }}
     >
       <div
         className="m-auto flex h-12 items-center w-full"
@@ -38,22 +38,7 @@ export default function Header() {
             router.push('/')
           }}
         >
-          LoveKong Stained Glass
-          {/* <IconHome
-            stroke={1}
-            onClick={() => {
-              router.push('/')
-            }}
-          ></IconHome> */}
-          <div className="flex justify-center items-center">
-            <div className="bg-red-400 sm:w-5 w-4 h-2"></div>
-            <div className="bg-orange-400 sm:w-5 w-4 h-2"></div>
-            <div className="bg-yellow-400 sm:w-5 w-4 h-2"></div>
-            <div className="bg-green-400 sm:w-5 w-4 h-2"></div>
-            <div className="bg-blue-400 sm:w-5 w-4 h-2"></div>
-            <div className="bg-blue-800 sm:w-5 w-4 h-2"></div>
-            <div className="bg-purple-400 sm:w-5 w-4 h-2"></div>
-          </div>
+          FontBeach
         </div>
         <span className="m-auto"></span>
         <div
@@ -63,12 +48,6 @@ export default function Header() {
           }}
         >
           Products
-          {/* <IconBox
-            stroke={1}
-            onClick={() => {
-              router.push('/products')
-            }}
-          ></IconBox> */}
         </div>
         <div
           className="cursor-pointer text-xs xs:text-sm flex justify-center items-center px-2 h-full"
@@ -77,12 +56,6 @@ export default function Header() {
           }}
         >
           Wish
-          {/* <IconHeart
-            stroke={1}
-            onClick={() => {
-              router.push('/wishlist')
-            }}
-          ></IconHeart> */}
         </div>
         <div
           className="cursor-pointer text-xs xs:text-sm flex justify-center items-center px-2 h-full"
@@ -91,12 +64,6 @@ export default function Header() {
           }}
         >
           Cart
-          {/* <IconShoppingCart
-            stroke={1}
-            onClick={() => {
-              router.push('/cart')
-            }}
-          ></IconShoppingCart> */}
         </div>
         <div
           className="cursor-pointer text-xs xs:text-sm flex justify-center items-center px-2 h-full"
@@ -135,7 +102,7 @@ export default function Header() {
 
 const ProfileMenu = () => {
   const menus = [
-    { title: '나의 주문', link: '/my' },
+    { title: '프로필', link: '/my' },
     { title: '로그아웃', link: '/auth/signout' },
   ]
   return (
