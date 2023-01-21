@@ -24,21 +24,28 @@ export default function Header() {
 
   return (
     <header
-      className="bg-white fixed top-0 left-0 right-0 z-50"
+      className="bg-white fixed top-0 left-0 right-0 z-50 py-5"
       style={{ borderBottom: '0.5px solid #3f7cf7' }}
     >
       <div
         className="m-auto flex h-12 items-center w-full"
         style={{ maxWidth: '1080px' }}
       >
-        <div
-          className="cursor-pointer text-xs xs:text-sm flex flex-col justify-center items-center ml-4"
-          style={{ fontFamily: 'Kashie-Mercy' }}
-          onClick={() => {
-            router.push('/')
-          }}
-        >
-          FontBeach
+        <div className="flex gap-5">
+          <div
+            className="cursor-pointer font-bold text-lg xs:text-2xl flex flex-col justify-center items-center ml-4"
+            onClick={() => {
+              router.push('/')
+            }}
+          >
+            FontBeach
+          </div>
+          <div>
+            <input
+              className="px-4 py-2 border rounded-full"
+              placeholder="Search Engine"
+            ></input>
+          </div>
         </div>
         <span className="m-auto"></span>
         <div
@@ -47,15 +54,9 @@ export default function Header() {
             router.push('/products')
           }}
         >
-          Products
-        </div>
-        <div
-          className="cursor-pointer text-xs xs:text-sm flex justify-center items-center px-2 h-full"
-          onClick={() => {
-            router.push('/wishlist')
-          }}
-        >
-          Wish
+          <button className="px-4 py-2 bg-primary rounded-xl text-white">
+            Night
+          </button>
         </div>
         <div
           className="cursor-pointer text-xs xs:text-sm flex justify-center items-center px-2 h-full"
@@ -63,15 +64,7 @@ export default function Header() {
             router.push('/cart')
           }}
         >
-          Cart
-        </div>
-        <div
-          className="cursor-pointer text-xs xs:text-sm flex justify-center items-center px-2 h-full"
-          onClick={() => {
-            router.push('/qna')
-          }}
-        >
-          {'Q&A'}
+          업로드
         </div>
         {session ? (
           <div className="mr-4 flex justify-center items-center relative">
@@ -92,7 +85,7 @@ export default function Header() {
               signIn()
             }}
           >
-            Login
+            로그인 / 회원가입
           </div>
         )}
       </div>

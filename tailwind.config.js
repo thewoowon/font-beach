@@ -5,7 +5,11 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#3f7cf7',
+      },
+    },
     screens: {
       xss: '390px',
       // => @media (min-width: 475px) { ... }
