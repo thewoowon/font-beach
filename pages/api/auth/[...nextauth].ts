@@ -1,12 +1,12 @@
-import NextAuth, { ISODateString, NextAuthOptions, Session } from 'next-auth'
+import NextAuth, { ISODateString, NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import prisma from '../../../lib/prismadb'
 import KakaoProvider from 'next-auth/providers/kakao'
 import NaverProvider from 'next-auth/providers/naver'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import * as bcrypt from 'bcrypt'
-import { User } from '@prisma/client'
+import { TypeORMLegacyAdapter } from '@next-auth/typeorm-legacy-adapter'
+import * as entities from 'lib/entities'
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 
 export interface CustomDefaultSession {
   user?: {
@@ -19,52 +19,32 @@ export interface CustomDefaultSession {
 }
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  adapter: TypeORMLegacyAdapter(
+    {
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'Ww940706!!',
+      database: 'fontBeach',
+      namingStrategy: new SnakeNamingStrategy(),
+      synchronize: true,
+      logging: true, // process.env.NODE_ENV === "development",
+    },
+    { entities }
+  ),
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
-    CredentialsProvider({
-      id: 'signInWithEmail',
-      name: 'Credentials',
-      credentials: {
-        email: { label: 'Email', type: 'email', placeholder: 'email' },
-        password: { label: 'Password', type: 'password' },
-      },
-      async authorize(credentials, req) {
-        try {
-          const user = await prisma.user.findUnique({
-            where: {
-              email: credentials?.email,
-            },
-          })
-          if (user) {
-            const result = await bcrypt.compare(
-              credentials?.password ?? '',
-              user?.password ?? ''
-            )
-
-            if (result) {
-              return Promise.resolve(user)
-            } else {
-              return Promise.resolve(null)
-            }
-          } else {
-            return Promise.resolve(null)
-          }
-        } catch (err) {
-          console.log(err)
-          return null
-        }
-      },
-    }),
     GoogleProvider({
       id: 'google',
       clientId: process.env.GOOGLE_CLIENT_ID ?? '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
     }),
-    // KakaoProvider({
-    //   clientId: process.env.KAKAO_CLIENT_ID ?? '',
-    //   clientSecret: process.env.KAKAO_CLIENT_SECRET ?? '',
-    // }),
+    KakaoProvider({
+      id: 'kakao',
+      clientId: process.env.KAKAO_CLIENT_ID ?? '',
+      clientSecret: process.env.KAKAO_CLIENT_SECRET ?? '',
+    }),
     NaverProvider({
       id: 'naver',
       clientId: process.env.NAVER_CLIENT_ID ?? '',

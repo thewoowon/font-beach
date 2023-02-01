@@ -6,7 +6,7 @@ import FontListBox from '@/components/FontListBox'
 import FontListItem from '@/components/FontListItem'
 import { useState } from 'react'
 
-export type ListItem = {
+export type FontListItemType = {
   id: number
   name: string
   description: string
@@ -14,13 +14,13 @@ export type ListItem = {
 }
 
 export default function Home() {
-  const [temp, setTemp] = useState<Array<ListItem>>([])
+  const [temp, setTemp] = useState<Array<FontListItemType>>([])
 
   return (
     <Layout title="FontBeach - Home" description="Welcome to the FontBeach!">
       <FontListBox>
         {temp?.map((item) => {
-          const fontElement: ListItem = {
+          const fontElement: FontListItemType = {
             id: item.id,
             name: item.name,
             description: item.description,
