@@ -7,7 +7,7 @@ const nextConfig = {
     emotion: true,
   },
   images: {
-    domains: [],
+    domains: ['ssl.pstatic.net'],
   },
 }
 
