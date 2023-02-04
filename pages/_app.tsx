@@ -10,6 +10,7 @@ import Script from 'next/script'
 import { Toaster } from 'react-hot-toast'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
+import { ThemeProvider } from 'next-themes'
 
 export default function App({
   Component,
@@ -42,15 +43,16 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
-        />
-        <Script
-          id="gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+        <ThemeProvider attribute="class" defaultTheme="light">
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+          />
+          <Script
+            id="gtag-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
@@ -58,12 +60,13 @@ export default function App({
             page_path: window.location.pathname,
           });
         `,
-          }}
-        />
-        <Header></Header>
-        <Component {...pageProps} />
-        <Footer></Footer>
-        <Toaster></Toaster>
+            }}
+          />
+          <Header></Header>
+          <Component {...pageProps} />
+          <Footer></Footer>
+          <Toaster></Toaster>
+        </ThemeProvider>
       </QueryClientProvider>
     </SessionProvider>
   )

@@ -10,21 +10,28 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { signIn } from 'next-auth/react'
+import ThemeSwitch from './ThemeSwitch'
+import fontbeach_black from '../public/assets/fontbeach_black.png'
+import fontbeach_white from '../public/assets/fontbeach_white.png'
+import { useTheme } from 'next-themes'
 
 export default function Header() {
   const { data: session, status } = useSession()
   const router = useRouter()
-
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme, resolvedTheme } = useTheme()
   const [toggle, setToggle] = useState(false)
   const clickProfile = () => {
     setToggle(!toggle)
   }
 
+  useEffect(() => setMounted(true), [])
+
   return (
     <header
-      className="bg-white fixed top-0 left-0 right-0 z-50 py-5"
+      className="bg-white dark:bg-blue-900 fixed top-0 left-0 right-0 z-50 py-5"
       style={{ borderBottom: '0.5px solid #3f7cf7' }}
     >
       <div
@@ -38,28 +45,35 @@ export default function Header() {
               router.push('/')
             }}
           >
-            FontBeach
+            {mounted && (theme === 'dark' || resolvedTheme === 'dark') ? (
+              <Image
+                alt=""
+                src={fontbeach_white}
+                width={100}
+                height={75}
+              ></Image>
+            ) : (
+              <Image
+                alt=""
+                src={fontbeach_black}
+                width={100}
+                height={75}
+              ></Image>
+            )}
           </div>
-          <div>
+          <div className="flex items-center">
             <input
-              className="px-4 py-2 border rounded-full outline-none"
+              className="bg-white text-black px-4 py-2 border rounded-full outline-none"
               placeholder="Search Engine"
             ></input>
           </div>
         </div>
         <span className="m-auto"></span>
-        <div
-          className="cursor-pointer text-xs xs:text-sm flex justify-center items-center px-2 h-full"
-          onClick={() => {
-            router.push('/products')
-          }}
-        >
-          <button className="px-4 py-2 bg-primary rounded-xl text-white">
-            Night
-          </button>
+        <div className="cursor-pointer mr-2 text-xs xs:text-sm flex justify-center items-center px-2 h-full">
+          <ThemeSwitch></ThemeSwitch>
         </div>
         <div
-          className="cursor-pointer text-xs xs:text-sm flex justify-center items-center px-2 h-full"
+          className="cursor-pointer mr-2 font-semibold text-xs xs:text-sm flex justify-center items-center px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200 ease-in-out"
           onClick={() => {
             router.push('/cart')
           }}
