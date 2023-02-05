@@ -30,10 +30,7 @@ export default function Header() {
   useEffect(() => setMounted(true), [])
 
   return (
-    <header
-      className="bg-white dark:bg-blue-900 fixed top-0 left-0 right-0 z-50 py-5"
-      style={{ borderBottom: '0.5px solid #3f7cf7' }}
-    >
+    <header className="bg-white dark:bg-blue-900 fixed top-0 left-0 right-0 z-50 py-5 border-b border-blue-500 dark:border-white">
       <div
         className="m-auto flex h-12 items-center w-full"
         style={{ maxWidth: '1080px' }}

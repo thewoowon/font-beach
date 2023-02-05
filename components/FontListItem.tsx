@@ -1,7 +1,15 @@
-import { ListItem } from '@/pages'
+import { FontListItemType } from '@/types/fonts'
 import Image from 'next/image'
 
-function FontListItem({ id, name, description, image }: ListItem) {
+function FontListItem({
+  id,
+  author,
+  name,
+  description,
+  image,
+  createdAt,
+  commerce,
+}: FontListItemType) {
   return (
     <div>
       <Image
