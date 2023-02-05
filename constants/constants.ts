@@ -1,5 +1,5 @@
-import { FontListItemType } from '@/pages'
 import { CategoryType } from '@/types/categories'
+import { FontListItemType } from '@/types/fonts'
 
 export const temptation = []
 
@@ -10,6 +10,9 @@ export const dummy: FontListItemType[] = [
     description: 'sans-serif',
     image:
       'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap',
+    author: 'google',
+    createdAt: '2021-01-01',
+    commerce: true,
   },
   {
     id: 1,
@@ -17,6 +20,9 @@ export const dummy: FontListItemType[] = [
     description: 'sans-serif',
     image:
       'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap',
+    author: 'google',
+    createdAt: '2021-01-01',
+    commerce: true,
   },
   {
     id: 1,
@@ -24,6 +30,9 @@ export const dummy: FontListItemType[] = [
     description: 'sans-serif',
     image:
       'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap',
+    author: 'google',
+    createdAt: '2021-01-01',
+    commerce: true,
   },
   {
     id: 1,
@@ -31,6 +40,9 @@ export const dummy: FontListItemType[] = [
     description: 'sans-serif',
     image:
       'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap',
+    author: 'google',
+    createdAt: '2021-01-01',
+    commerce: true,
   },
   {
     id: 1,
@@ -38,6 +50,9 @@ export const dummy: FontListItemType[] = [
     description: 'sans-serif',
     image:
       'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap',
+    author: 'google',
+    createdAt: '2021-01-01',
+    commerce: true,
   },
 ]
 

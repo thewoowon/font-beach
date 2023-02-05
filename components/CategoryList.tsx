@@ -12,9 +12,7 @@ export default function CategoryList({
       <ul>
         {Categories.map((category) => (
           <li key={category.id}>
-            <Link href={`/categories/${category.id}`}>
-              <a>{category.name}</a>
-            </Link>
+            <Link href={`/categories/${category.id}`}>{category.name}</Link>
           </li>
         ))}
       </ul>

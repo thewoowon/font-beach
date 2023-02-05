@@ -1,3 +1,7 @@
-export default function FilterWrapper() {
-  return <div></div>
+export default function FilterWrapper({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return <div>{children}</div>
 }
