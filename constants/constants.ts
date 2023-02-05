@@ -8,8 +8,7 @@ export const dummy: FontListItemType[] = [
     id: 1,
     name: 'Noto Sans KR',
     description: 'sans-serif',
-    image:
-      'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap',
+    image: '/assets/logo.png',
     author: 'google',
     createdAt: '2021-01-01',
     commerce: true,
@@ -18,8 +17,7 @@ export const dummy: FontListItemType[] = [
     id: 1,
     name: 'Noto Sans KR',
     description: 'sans-serif',
-    image:
-      'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap',
+    image: '/assets/logo.png',
     author: 'google',
     createdAt: '2021-01-01',
     commerce: true,
@@ -28,8 +26,7 @@ export const dummy: FontListItemType[] = [
     id: 1,
     name: 'Noto Sans KR',
     description: 'sans-serif',
-    image:
-      'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap',
+    image: '/assets/logo.png',
     author: 'google',
     createdAt: '2021-01-01',
     commerce: true,
@@ -38,8 +35,7 @@ export const dummy: FontListItemType[] = [
     id: 1,
     name: 'Noto Sans KR',
     description: 'sans-serif',
-    image:
-      'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap',
+    image: '/assets/logo.png',
     author: 'google',
     createdAt: '2021-01-01',
     commerce: true,
@@ -48,8 +44,7 @@ export const dummy: FontListItemType[] = [
     id: 1,
     name: 'Noto Sans KR',
     description: 'sans-serif',
-    image:
-      'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap',
+    image: '/assets/logo.png',
     author: 'google',
     createdAt: '2021-01-01',
     commerce: true,

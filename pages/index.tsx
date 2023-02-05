@@ -11,15 +11,15 @@ import CategoryList from '@/components/CategoryList'
 import { CategoryType } from '@/types/categories'
 import FilterWrapper from '@/components/FilterWrapper'
 import FilterBox from '@/components/FilterBox'
+import { dummy } from '@/constants/constants'
 
 export default function Home() {
-  const [temp, setTemp] = useState<Array<FontListItemType>>([])
-  const [categories, setCategories] = useState<Array<CategoryType>>([])
+  const [temp, setTemp] = useState<Array<FontListItemType>>(dummy)
 
   return (
     <Layout title="FontBeach - Home" description="Welcome to the FontBeach!">
       <CategoryWrapper>
-        <CategoryList categories={categories}></CategoryList>
+        <CategoryList></CategoryList>
       </CategoryWrapper>
       <FilterWrapper>
         <FilterBox></FilterBox>
