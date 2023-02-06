@@ -15,7 +15,12 @@ export default function Footer() {
         style={{ maxWidth: '1080px' }}
       >
         <div>
-          <Image src={'/vercel.svg'} alt="" width={200} height={300}></Image>
+          <Image
+            src={'/assets/logo.png'}
+            alt=""
+            width={200}
+            height={300}
+          ></Image>
         </div>
         <div className="w-full gap-2 max-w-5xl m-auto flex justify-start items-start xl:text-sm lg:text-sm md:text-xs sm:text-xs text-xs">
           <div className="flex flex-col items-center">

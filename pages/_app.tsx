@@ -72,6 +72,10 @@ export default function App({
             />
             <Header></Header>
             <Component {...pageProps} />
+            <div className="bg-zinc-100 h-56 flex flex-col justify-center items-center">
+              <div className="flextext-lg">100 +</div>
+              <div>FREE FONTS</div>
+            </div>
             <Footer></Footer>
             <Toaster></Toaster>
           </RecoilRoot>

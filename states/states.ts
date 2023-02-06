@@ -15,4 +15,9 @@ const textSizeState = atom({
   default: 25,
 })
 
-export { fontColorState, backgroundColorState, textSizeState }
+const openModalState = atom({
+  key: 'openModalState',
+  default: false,
+})
+
+export { fontColorState, backgroundColorState, textSizeState, openModalState }

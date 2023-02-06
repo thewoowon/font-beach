@@ -10,24 +10,8 @@ import {
 } from 'states/states'
 import { Checkbox } from '@mantine/core'
 import { IconRefresh, IconShare } from '@tabler/icons'
-
-const FontColorPallete = ({ show }: { show: boolean }) => {
-  const [color, setColor] = useRecoilState(fontColorState)
-  return show ? (
-    <div className="absolute top-20">
-      <HexColorPicker color={color} onChange={setColor} />
-    </div>
-  ) : null
-}
-
-const BackgroundColorPallete = ({ show }: { show: boolean }) => {
-  const [color, setColor] = useRecoilState(backgroundColorState)
-  return show ? (
-    <div className="absolute top-20">
-      <HexColorPicker color={color} onChange={setColor} />
-    </div>
-  ) : null
-}
+import { BackgroundColorPallete } from './BackgroundColorPallete'
+import { FontColorPallete } from './FontColorPallete'
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -46,6 +30,7 @@ const useStyles = createStyles((theme) => ({
     paddingLeft: theme.spacing.sm,
     paddingTop: theme.spacing.sm / 2,
     zIndex: 1,
+    right: 5,
   },
 
   slider: {
@@ -81,7 +66,7 @@ export default function FilterBox() {
       <div className="flex gap-5">
         <input
           placeholder="폰트 이름 입력"
-          className="mx-2 px-2 py-2 rounded-lg border outline-none"
+          className="mx-2 px-2 py-2 rounded-lg border outline-none dark:bg-white"
         ></input>
         <div className={classes.wrapper}>
           <NumberInput
@@ -93,6 +78,7 @@ export default function FilterBox() {
             min={2}
             max={100}
             hideControls
+            label="폰트 크기"
             classNames={{ input: classes.input, label: classes.label }}
           />
           <Slider

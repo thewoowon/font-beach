@@ -11,7 +11,7 @@ function Layout({
   children: React.ReactNode
 }) {
   return (
-    <div className="pt-28">
+    <div className="pt-28 dark:bg-zinc-800 pb-28">
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />

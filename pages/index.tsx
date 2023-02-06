@@ -12,15 +12,21 @@ import { CategoryType } from '@/types/categories'
 import FilterWrapper from '@/components/FilterWrapper'
 import FilterBox from '@/components/FilterBox'
 import { dummy } from '@/constants/constants'
+import { Modal } from '@mantine/core'
+import { useRecoilState } from 'recoil'
+import { openModalState } from '@/states/states'
+import ModalImageBox from '@/components/ModalImageBox'
+import ImageWrapper from '@/components/ImageWrapper'
 
 export default function Home() {
   const [temp, setTemp] = useState<Array<FontListItemType>>(dummy)
-
+  const [opened, setOpened] = useRecoilState(openModalState)
   return (
     <Layout title="FontBeach - Home" description="Welcome to the FontBeach!">
       <CategoryWrapper>
         <CategoryList></CategoryList>
       </CategoryWrapper>
+      <ImageWrapper></ImageWrapper>
       <FilterWrapper>
         <FilterBox></FilterBox>
       </FilterWrapper>
@@ -38,6 +44,14 @@ export default function Home() {
           return <FontListItem key={fontElement.id} {...fontElement} />
         })}
       </FontListBox>
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        centered
+        size="xl"
+      >
+        <ModalImageBox />
+      </Modal>
     </Layout>
   )
 }

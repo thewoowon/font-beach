@@ -1,11 +1,17 @@
 import { FontListItemType } from '@/types/fonts'
 import Image from 'next/image'
-import { IconPhoto, IconPlus, IconCloudUpload } from '@tabler/icons'
+import {
+  IconPhoto,
+  IconPlus,
+  IconCloudUpload,
+  IconCloudDownload,
+} from '@tabler/icons'
 import styled from '@emotion/styled'
 import { useRecoilState } from 'recoil'
 import {
   backgroundColorState,
   fontColorState,
+  openModalState,
   textSizeState,
 } from '@/states/states'
 
@@ -22,49 +28,101 @@ export default function FontListItem({
   const [backgroundColor, setBackgroundColor] =
     useRecoilState(backgroundColorState)
   const [textSize, setTextSize] = useRecoilState(textSizeState)
-
+  const [opened, setOpened] = useRecoilState(openModalState)
   return (
-    <div className="flex justify-center items-center bg-blue-500 my-5 rounded-full p-6">
-      <div className="w-full bg-white rounded-full px-20 py-5">
-        <div className="flex justify-between">
-          <div>{`${author}님의 ${name} 폰트`}</div>
+    <FontListItemBackground className="flex justify-center items-center my-5 rounded-lg p-2">
+      <FontListBoxWrapper
+        readOnly={false}
+        backgroundColor={backgroundColor}
+        className="w-full bg-white rounded-lg px-5 py-5"
+      >
+        <div className="flex justify-between dark:text-black">
+          <div>
+            <span className="text-lg font-bold">{author}</span>님의{' '}
+            <span className="text-xl text-black font-light">{name}</span>
+          </div>
           <div className="flex">
-            <div className="ml-5 px-2 bg-blue-500 rounded-md text-white">
+            <div className="flex justify-center items-center ml-5 px-2 bg-blue-500 rounded-md text-white font-semibold">
               {createdAt}
             </div>
-            <div className="ml-5 px-2 bg-green-500 rounded-md text-white">{`${
+            <div className="flex justify-center items-center ml-5 px-2 bg-blue-500 rounded-md text-white font-semibold">{`${
               commerce ? 'Commercial Use!' : 'Only Personal Use!'
             }`}</div>
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <FontListItemText color={fontColor} readOnly={false} size={textSize}>
+          <FontListItemText
+            backgroundColor={backgroundColor}
+            color={fontColor}
+            readOnly={false}
+            size={textSize}
+          >
             {'TEXT HELLO WORLD'}
           </FontListItemText>
-          <div className="flex gap-5">
-            <div className="bg-green-500 p-2 rounded-full hover:bg-green-600 transition duration-200 ease-in-out">
-              <IconPhoto stroke={2} size={40} color={'white'}></IconPhoto>
+          <div className="flex gap-5 my-5">
+            <div
+              onClick={() => {
+                setOpened(true)
+              }}
+              className="flex justify-center items-center shadow-md bg-white p-2 rounded-full hover:bg-zinc-100 transition duration-200 ease-in-out cursor-pointer"
+            >
+              <IconPhoto stroke={1.3} size={40} color={'#3b82f6'}></IconPhoto>
             </div>
-            <div className="bg-green-500 p-2 rounded-full hover:bg-green-600 transition duration-200 ease-in-out">
-              <IconPlus stroke={2} size={40} color={'white'}></IconPlus>
+            <div className="flex justify-center items-center shadow-md bg-white p-2 rounded-full hover:bg-zinc-100 transition duration-200 ease-in-out cursor-pointer">
+              <IconPlus stroke={1.3} size={40} color={'#3b82f6'}></IconPlus>
             </div>
-            <div className="bg-green-500 p-2 rounded-full hover:bg-green-600 transition duration-200 ease-in-out">
-              <IconCloudUpload
+            <CloudDownloadIconBackground className="flex justify-center items-center shadow-md bg-green-500 p-2 rounded-full hover:bg-green-600 transition duration-200 ease-in-out cursor-pointer">
+              <IconCloudDownload
                 stroke={2}
                 size={40}
                 color={'white'}
-              ></IconCloudUpload>
-            </div>
+              ></IconCloudDownload>
+            </CloudDownloadIconBackground>
           </div>
         </div>
-      </div>
-    </div>
+      </FontListBoxWrapper>
+    </FontListItemBackground>
   )
 }
 
-const FontListItemText = styled.div<{ readOnly: boolean; size: number }>`
+const FontListItemText = styled.div<{
+  color: string
+  backgroundColor: string
+  readOnly: boolean
+  size: number
+}>`
   ${(props) =>
     props.readOnly
       ? ''
-      : `font-size:${props.size}px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;`}
+      : `font-size:${props.size}px;color:${props.color};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;`}
+`
+
+const FontListBoxWrapper = styled.div<{
+  backgroundColor: string
+  readOnly: boolean
+}>`
+  ${(props) =>
+    props.readOnly ? '' : `background-color:${props.backgroundColor};`}
+`
+
+const CloudDownloadIconBackground = styled.div`
+  background: rgb(5, 233, 225);
+  background: linear-gradient(
+    90deg,
+    rgba(5, 233, 225, 1) 0%,
+    rgba(61, 73, 251, 1) 35%,
+    rgba(162, 1, 239, 1) 77%,
+    rgba(255, 0, 226, 1) 100%
+  );
+`
+
+const FontListItemBackground = styled.div`
+  background: rgb(5, 233, 225);
+  background: linear-gradient(
+    90deg,
+    rgba(5, 233, 225, 1) 0%,
+    rgba(61, 73, 251, 1) 35%,
+    rgba(162, 1, 239, 1) 77%,
+    rgba(255, 0, 226, 1) 100%
+  );
 `
