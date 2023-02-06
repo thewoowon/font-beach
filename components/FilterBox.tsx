@@ -1,5 +1,25 @@
+import styled from '@emotion/styled'
 import { createStyles, NumberInput, Slider } from '@mantine/core'
 import { useState } from 'react'
+import { HexColorPicker } from 'react-colorful'
+
+const FontColorPallete = ({ show }: { show: boolean }) => {
+  const [color, setColor] = useState('#000000')
+  return show ? (
+    <div className="absolute">
+      <HexColorPicker color={color} onChange={setColor} />
+    </div>
+  ) : null
+}
+
+const BackgroundColorPallete = ({ show }: { show: boolean }) => {
+  const [color, setColor] = useState('#FFFFFF')
+  return show ? (
+    <div className="absolute">
+      <HexColorPicker color={color} onChange={setColor} />
+    </div>
+  ) : null
+}
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -44,7 +64,8 @@ const useStyles = createStyles((theme) => ({
 export default function FilterBox() {
   const { classes } = useStyles()
   const [value, setValue] = useState<number | undefined>(2200)
-
+  const [fontColorPallete, setFontColorPallete] = useState(false)
+  const [backgroundColorPallete, setBackgroundColorPallete] = useState(false)
   return (
     <div className="w-full flex flex-wrap gap-5">
       <input
@@ -75,12 +96,46 @@ export default function FilterBox() {
           classNames={{ thumb: classes.thumb, track: classes.track }}
         />
       </div>
-      <button className="px-4 py-2 bg-blue-500 rounded-lg mx-2">색깔</button>
-      <button className="px-4 py-2 bg-blue-500 rounded-lg mx-2">상업용</button>
-      <button className="px-4 py-2 bg-blue-500 rounded-lg mx-2">
+      <div className="relative flex flex-col gap-1 items-center justify-center">
+        <BackgroundColorPalleteBox
+          onClick={() => setFontColorPallete(!fontColorPallete)}
+          readOnly={false}
+          color={'#FFFFFF'}
+        ></BackgroundColorPalleteBox>
+        <FontColorPalleteBox
+          onClick={() => setBackgroundColorPallete(!backgroundColorPallete)}
+          readOnly={false}
+          color={'#000000'}
+        ></FontColorPalleteBox>
+        <FontColorPallete show={fontColorPallete} />
+        <BackgroundColorPallete show={backgroundColorPallete} />
+      </div>
+      <button className="px-4 py-2 bg-blue-500 rounded-lg mx-2 text-white">
+        상업용
+      </button>
+      <button className="px-4 py-2 bg-blue-500 rounded-lg mx-2 text-white">
         새로고침
       </button>
-      <button className="px-4 py-2 bg-blue-500 rounded-lg mx-2">공유</button>
+      <button className="px-4 py-2 bg-blue-500 rounded-lg mx-2 text-white">
+        공유
+      </button>
     </div>
   )
 }
+
+const FontColorPalleteBox = styled.div<{ color: string; readOnly: boolean }>`
+  ${(props) =>
+    props.readOnly
+      ? ''
+      : `background-color: ${props.color};width:20px;height:20px;border-radius:15%;border:2px solid #3b82f6;`}
+`
+
+const BackgroundColorPalleteBox = styled.div<{
+  color: string
+  readOnly: boolean
+}>`
+  ${(props) =>
+    props.readOnly
+      ? ''
+      : `background-color: ${props.color};width:20px;height:20px;border-radius:15%;border:2px solid #3b82f6;`}
+`
