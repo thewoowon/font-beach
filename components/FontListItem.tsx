@@ -1,7 +1,15 @@
 import { FontListItemType } from '@/types/fonts'
 import Image from 'next/image'
+import { IconPhoto, IconPlus, IconCloudUpload } from '@tabler/icons'
+import styled from '@emotion/styled'
+import { useRecoilState } from 'recoil'
+import {
+  backgroundColorState,
+  fontColorState,
+  textSizeState,
+} from '@/states/states'
 
-function FontListItem({
+export default function FontListItem({
   id,
   author,
   name,
@@ -10,33 +18,43 @@ function FontListItem({
   createdAt,
   commerce,
 }: FontListItemType) {
+  const [fontColor, setFontColor] = useRecoilState(fontColorState)
+  const [backgroundColor, setBackgroundColor] =
+    useRecoilState(backgroundColorState)
+  const [textSize, setTextSize] = useRecoilState(textSizeState)
+
   return (
     <div className="flex justify-center items-center bg-blue-500 my-5 rounded-full p-6">
       <div className="w-full bg-white rounded-full px-20 py-5">
         <div className="flex justify-between">
           <div>{`${author}님의 ${name} 폰트`}</div>
-          <div>{`${createdAt} ${
-            commerce ? '상업적 용도 사용 가능' : '상업적 용도 사용 불가'
-          }`}</div>
+          <div className="flex">
+            <div className="ml-5 px-2 bg-blue-500 rounded-md text-white">
+              {createdAt}
+            </div>
+            <div className="ml-5 px-2 bg-green-500 rounded-md text-white">{`${
+              commerce ? 'Commercial Use!' : 'Only Personal Use!'
+            }`}</div>
+          </div>
         </div>
         <div className="flex justify-between items-center">
-          <Image
-            alt="temp"
-            src={image}
-            width={200}
-            height={200}
-            unoptimized={true}
-          ></Image>
+          <FontListItemText color={fontColor} readOnly={false} size={textSize}>
+            {'TEXT HELLO WORLD'}
+          </FontListItemText>
           <div className="flex gap-5">
-            <button className="px-4 py-2 bg-blue-500 rounded-lg text-white">
-              사진
-            </button>
-            <button className="px-4 py-2 bg-blue-500 rounded-lg text-white">
-              추가
-            </button>
-            <button className="px-4 py-2 bg-blue-500 rounded-lg text-white">
-              클라우드
-            </button>
+            <div className="bg-green-500 p-2 rounded-full hover:bg-green-600 transition duration-200 ease-in-out">
+              <IconPhoto stroke={2} size={40} color={'white'}></IconPhoto>
+            </div>
+            <div className="bg-green-500 p-2 rounded-full hover:bg-green-600 transition duration-200 ease-in-out">
+              <IconPlus stroke={2} size={40} color={'white'}></IconPlus>
+            </div>
+            <div className="bg-green-500 p-2 rounded-full hover:bg-green-600 transition duration-200 ease-in-out">
+              <IconCloudUpload
+                stroke={2}
+                size={40}
+                color={'white'}
+              ></IconCloudUpload>
+            </div>
           </div>
         </div>
       </div>
@@ -44,4 +62,9 @@ function FontListItem({
   )
 }
 
-export default FontListItem
+const FontListItemText = styled.div<{ readOnly: boolean; size: number }>`
+  ${(props) =>
+    props.readOnly
+      ? ''
+      : `font-size:${props.size}px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;`}
+`

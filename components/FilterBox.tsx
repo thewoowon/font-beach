@@ -2,20 +2,28 @@ import styled from '@emotion/styled'
 import { createStyles, NumberInput, Slider } from '@mantine/core'
 import { useState } from 'react'
 import { HexColorPicker } from 'react-colorful'
+import { useRecoilState } from 'recoil'
+import {
+  fontColorState,
+  backgroundColorState,
+  textSizeState,
+} from 'states/states'
+import { Checkbox } from '@mantine/core'
+import { IconRefresh, IconShare } from '@tabler/icons'
 
 const FontColorPallete = ({ show }: { show: boolean }) => {
-  const [color, setColor] = useState('#000000')
+  const [color, setColor] = useRecoilState(fontColorState)
   return show ? (
-    <div className="absolute">
+    <div className="absolute top-20">
       <HexColorPicker color={color} onChange={setColor} />
     </div>
   ) : null
 }
 
 const BackgroundColorPallete = ({ show }: { show: boolean }) => {
-  const [color, setColor] = useState('#FFFFFF')
+  const [color, setColor] = useRecoilState(backgroundColorState)
   return show ? (
-    <div className="absolute">
+    <div className="absolute top-20">
       <HexColorPicker color={color} onChange={setColor} />
     </div>
   ) : null
@@ -28,8 +36,6 @@ const useStyles = createStyles((theme) => ({
 
   input: {
     height: 'auto',
-    paddingTop: 22,
-    paddingBottom: 3,
     borderBottomRightRadius: 0,
     borderBottomLeftRadius: 0,
   },
@@ -63,62 +69,87 @@ const useStyles = createStyles((theme) => ({
 
 export default function FilterBox() {
   const { classes } = useStyles()
-  const [value, setValue] = useState<number | undefined>(2200)
+  const [fonrSize, setFontSize] = useState<number | undefined>(25)
   const [fontColorPallete, setFontColorPallete] = useState(false)
   const [backgroundColorPallete, setBackgroundColorPallete] = useState(false)
+  const [fontColor, setFontColor] = useRecoilState(fontColorState)
+  const [backgroundColor, setBackgroundColor] =
+    useRecoilState(backgroundColorState)
+  const [textSize, setTextSize] = useRecoilState(textSizeState)
   return (
-    <div className="w-full flex flex-wrap gap-5">
-      <input
-        placeholder="폰트 이름 입력"
-        className="mx-2 px-2 py-2 rounded-lg border outline-none"
-      ></input>
-      <div className={classes.wrapper}>
-        <NumberInput
-          value={value}
-          onChange={setValue}
-          placeholder="2200 is an average value"
-          step={50}
-          min={0}
-          max={8000}
-          hideControls
-          classNames={{ input: classes.input, label: classes.label }}
-        />
-        <Slider
-          max={8000}
-          step={50}
-          min={0}
-          label={null}
-          value={value}
-          onChange={setValue}
-          size={2}
-          radius={0}
-          className={classes.slider}
-          classNames={{ thumb: classes.thumb, track: classes.track }}
-        />
+    <div className="w-full flex justify-between">
+      <div className="flex gap-5">
+        <input
+          placeholder="폰트 이름 입력"
+          className="mx-2 px-2 py-2 rounded-lg border outline-none"
+        ></input>
+        <div className={classes.wrapper}>
+          <NumberInput
+            value={textSize}
+            onChange={() => {
+              setTextSize(textSize)
+            }}
+            step={1}
+            min={2}
+            max={100}
+            hideControls
+            classNames={{ input: classes.input, label: classes.label }}
+          />
+          <Slider
+            max={100}
+            step={1}
+            min={2}
+            value={textSize}
+            onChange={setTextSize}
+            size={10}
+            radius={0}
+            className={classes.slider}
+            classNames={{ thumb: classes.thumb, track: classes.track }}
+          />
+        </div>
+        <div className="relative flex flex-col gap-1 items-center justify-center">
+          <BackgroundColorPalleteBox
+            onClick={() => {
+              setFontColorPallete(!fontColorPallete)
+              setBackgroundColorPallete(false)
+            }}
+            readOnly={false}
+            color={fontColor}
+          ></BackgroundColorPalleteBox>
+          <FontColorPalleteBox
+            onClick={() => {
+              setBackgroundColorPallete(!backgroundColorPallete)
+              setFontColorPallete(false)
+            }}
+            readOnly={false}
+            color={backgroundColor}
+          ></FontColorPalleteBox>
+          <FontColorPallete show={fontColorPallete} />
+          <BackgroundColorPallete show={backgroundColorPallete} />
+        </div>
       </div>
-      <div className="relative flex flex-col gap-1 items-center justify-center">
-        <BackgroundColorPalleteBox
-          onClick={() => setFontColorPallete(!fontColorPallete)}
-          readOnly={false}
-          color={'#FFFFFF'}
-        ></BackgroundColorPalleteBox>
-        <FontColorPalleteBox
-          onClick={() => setBackgroundColorPallete(!backgroundColorPallete)}
-          readOnly={false}
-          color={'#000000'}
-        ></FontColorPalleteBox>
-        <FontColorPallete show={fontColorPallete} />
-        <BackgroundColorPallete show={backgroundColorPallete} />
+      <div className="flex gap-5">
+        <div className="h-full flex items-center justify-center">
+          <Checkbox
+            onChange={(e) => {
+              console.log('사용 가능')
+            }}
+            label="상업적 용도 사용 여부"
+          />
+        </div>
+        <div className="h-full flex items-center justify-center">
+          <div className="p-2 bg-white rounded-full shadow-md hover:bg-zinc-300">
+            <IconRefresh
+              className="hover:animate-spin"
+              stroke={2}
+              color={'#3b82f6'}
+            ></IconRefresh>
+          </div>
+        </div>
+        <div className="h-full flex items-center justify-center">
+          <IconShare stroke={2}></IconShare>
+        </div>
       </div>
-      <button className="px-4 py-2 bg-blue-500 rounded-lg mx-2 text-white">
-        상업용
-      </button>
-      <button className="px-4 py-2 bg-blue-500 rounded-lg mx-2 text-white">
-        새로고침
-      </button>
-      <button className="px-4 py-2 bg-blue-500 rounded-lg mx-2 text-white">
-        공유
-      </button>
     </div>
   )
 }
