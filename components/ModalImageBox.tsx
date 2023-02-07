@@ -1,6 +1,8 @@
+import { textInputState } from '@/states/states'
 import styled from '@emotion/styled'
 import { IconClipboard, IconClipboardCopy } from '@tabler/icons'
 import Link from 'next/link'
+import { useRecoilState } from 'recoil'
 
 export default function ModalImageBox() {
   const handleCopyClipBoard = async (text: string) => {
@@ -12,6 +14,7 @@ export default function ModalImageBox() {
     }
   }
   const tempLink = 'https://www.naver.com'
+  const [textInput, setTextInput] = useRecoilState(textInputState)
 
   return (
     <div className="flex flex-col">
@@ -41,7 +44,7 @@ export default function ModalImageBox() {
         </button>
       </div>
       <div className="flex justify-center pt-5 pb-2">
-        다이렉드 링크를 바로 활용해보세요!
+        다이렉트 링크를 바로 활용해보세요!
       </div>
       <div className="flex justify-center py-5">
         <div className="flex items-center border-2 border-black rounded-full hover:bg-zinc-100">

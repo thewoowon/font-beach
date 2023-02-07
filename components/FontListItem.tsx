@@ -11,7 +11,9 @@ import { useRecoilState } from 'recoil'
 import {
   backgroundColorState,
   fontColorState,
+  fontSelectedState,
   openModalState,
+  textInputState,
   textSizeState,
 } from '@/states/states'
 
@@ -23,12 +25,16 @@ export default function FontListItem({
   image,
   createdAt,
   commerce,
+  code,
 }: FontListItemType) {
   const [fontColor, setFontColor] = useRecoilState(fontColorState)
   const [backgroundColor, setBackgroundColor] =
     useRecoilState(backgroundColorState)
   const [textSize, setTextSize] = useRecoilState(textSizeState)
   const [opened, setOpened] = useRecoilState(openModalState)
+  const [textInput, setTextInput] = useRecoilState(textInputState)
+  const [fontSelected, setFontSelected] = useRecoilState(fontSelectedState)
+
   return (
     <FontListItemBackground className="flex justify-center items-center my-5 rounded-lg p-2">
       <FontListBoxWrapper
@@ -57,12 +63,13 @@ export default function FontListItem({
             readOnly={false}
             size={textSize}
           >
-            {'TEXT HELLO WORLD'}
+            {textInput == '' ? '폰트를 입력해주세요!' : textInput}
           </FontListItemText>
           <div className="flex gap-5 my-5">
             <div
               onClick={() => {
                 setOpened(true)
+                setFontSelected(code)
               }}
               className="flex justify-center items-center shadow-md bg-white p-2 rounded-full hover:bg-zinc-100 transition duration-200 ease-in-out cursor-pointer"
             >

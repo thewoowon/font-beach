@@ -20,4 +20,21 @@ const openModalState = atom({
   default: false,
 })
 
-export { fontColorState, backgroundColorState, textSizeState, openModalState }
+const textInputState = atom({
+  key: 'textInputState',
+  default: '',
+})
+
+const fontSelectedState = atom({
+  key: 'fontSelectedState',
+  default: 'Noto Sans KR',
+})
+
+export {
+  fontColorState,
+  backgroundColorState,
+  textSizeState,
+  openModalState,
+  textInputState,
+  fontSelectedState,
+}

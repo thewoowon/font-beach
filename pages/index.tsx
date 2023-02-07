@@ -16,7 +16,7 @@ import { Modal } from '@mantine/core'
 import { useRecoilState } from 'recoil'
 import { openModalState } from '@/states/states'
 import ModalImageBox from '@/components/ModalImageBox'
-import ImageWrapper from '@/components/ImageWrapper'
+import styled from '@emotion/styled'
 
 export default function Home() {
   const [temp, setTemp] = useState<Array<FontListItemType>>(dummy)
@@ -26,7 +26,7 @@ export default function Home() {
       <CategoryWrapper>
         <CategoryList></CategoryList>
       </CategoryWrapper>
-      <ImageWrapper></ImageWrapper>
+      <ImageFill src="/assets/beach.jpeg" className="flex"></ImageFill>
       <FilterWrapper>
         <FilterBox></FilterBox>
       </FilterWrapper>
@@ -40,13 +40,16 @@ export default function Home() {
             createdAt: item.createdAt,
             author: item.author,
             commerce: item.commerce,
+            code: item.code,
           }
           return <FontListItem key={fontElement.id} {...fontElement} />
         })}
       </FontListBox>
       <Modal
         opened={opened}
-        onClose={() => setOpened(false)}
+        onClose={() => {
+          setOpened(false)
+        }}
         centered
         size="xl"
       >
@@ -55,3 +58,15 @@ export default function Home() {
     </Layout>
   )
 }
+
+const ImageFill = styled.div<{ src: string }>`
+  background-image: url(${(props) => props.src});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+`

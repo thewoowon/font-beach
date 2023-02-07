@@ -6,5 +6,6 @@ export type FontListItemType = {
   image: string
   createdAt: string
   commerce: boolean
+  code: string
 }
 //

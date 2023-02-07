@@ -7,6 +7,7 @@ import {
   fontColorState,
   backgroundColorState,
   textSizeState,
+  textInputState,
 } from 'states/states'
 import { Checkbox } from '@mantine/core'
 import { IconRefresh, IconShare } from '@tabler/icons'
@@ -61,11 +62,16 @@ export default function FilterBox() {
   const [backgroundColor, setBackgroundColor] =
     useRecoilState(backgroundColorState)
   const [textSize, setTextSize] = useRecoilState(textSizeState)
+  const [textInput, setTextInput] = useRecoilState(textInputState)
   return (
     <div className="w-full flex justify-between">
       <div className="flex gap-5">
         <input
-          placeholder="폰트 이름 입력"
+          onChange={(e) => {
+            setTextInput(e.target.value)
+          }}
+          value={textInput}
+          placeholder="텍스트 입력"
           className="mx-2 px-2 py-2 rounded-lg border outline-none dark:bg-white"
         ></input>
         <div className={classes.wrapper}>
