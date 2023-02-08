@@ -48,10 +48,10 @@ export default function FontListItem({
             <span className="text-xl text-black font-light">{name}</span>
           </div>
           <div className="flex">
-            <div className="flex justify-center items-center ml-5 px-2 bg-blue-500 rounded-md text-white font-semibold">
+            <div className="flex justify-center items-center ml-5 px-2 bg-black rounded-md text-white font-semibold">
               {createdAt}
             </div>
-            <div className="flex justify-center items-center ml-5 px-2 bg-blue-500 rounded-md text-white font-semibold">{`${
+            <div className="flex justify-center items-center ml-5 px-2 bg-black rounded-md text-white font-semibold">{`${
               commerce ? 'Commercial Use!' : 'Only Personal Use!'
             }`}</div>
           </div>
@@ -62,6 +62,7 @@ export default function FontListItem({
             color={fontColor}
             readOnly={false}
             size={textSize}
+            name={name}
           >
             {textInput == '' ? '폰트를 입력해주세요!' : textInput}
           </FontListItemText>
@@ -69,7 +70,7 @@ export default function FontListItem({
             <div
               onClick={() => {
                 setOpened(true)
-                setFontSelected(code)
+                setFontSelected(name)
               }}
               className="flex justify-center items-center shadow-md bg-white p-2 rounded-full hover:bg-zinc-100 transition duration-200 ease-in-out cursor-pointer"
             >
@@ -97,11 +98,12 @@ const FontListItemText = styled.div<{
   backgroundColor: string
   readOnly: boolean
   size: number
+  name: string
 }>`
   ${(props) =>
     props.readOnly
       ? ''
-      : `font-size:${props.size}px;color:${props.color};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;`}
+      : `font-family:${props.name};font-size:${props.size}px;color:${props.color};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;`}
 `
 
 const FontListBoxWrapper = styled.div<{

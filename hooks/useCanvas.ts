@@ -1,22 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
 
-const useCanvas = () => {
+const useCanvas = (fontSize: number, fontFamily: string) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [context, setContext] = useState<CanvasRenderingContext2D | null>(null)
-  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null)
-
+  const [dataURL, setDataURL] = useState<string | undefined>('')
   useEffect(() => {
     const canvas = canvasRef.current
     if (canvas) {
       const context = canvas.getContext('2d')
       if (context) {
-        setContext(context)
-        setCanvas(canvas)
+        context.font = `${fontSize}px ${fontFamily}`
+        context.fillText('Hello World', 10, 50)
       }
+      setDataURL(canvas.toDataURL())
     }
   }, [canvasRef])
 
-  return { canvasRef, context, canvas }
+  return dataURL
 }
 
 export default useCanvas
