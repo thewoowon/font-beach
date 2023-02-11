@@ -35,11 +35,13 @@ export default function ModalImageBox() {
   useEffect(() => {
     const canvas = canvasRef.current
     if (canvas) {
-      canvas.width = textSize * textInput.length * 0.75
+      canvas.width = textSize * textInput.length * 0.9
       canvas.height = textSize * 1.2
       const context = canvas.getContext('2d')
       if (context) {
-        context.font = `${textSize}px ${fontSelected}`
+        context.font = `${textSize}px ${'MapoDacapo'}`
+        context.fillStyle = fontColor
+        context.strokeStyle = backgroundColor
         context.fillText(textInput, 0, textSize)
       }
       setLinkText(String(canvas.toDataURL()))
@@ -120,7 +122,7 @@ const FontListItemText = styled.div<{
   ${(props) =>
     props.readOnly
       ? ''
-      : `font-family:${props.name};font-size:${props.size}px;color:${props.color};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;`}
+      : `background-color:${props.backgroundColor};font-family:${props.name};font-size:${props.size}px;color:${props.color};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;`}
 `
 
 const ModalButtonBackground = styled.button`

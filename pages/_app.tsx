@@ -18,6 +18,7 @@ import {
   useRecoilState,
   useRecoilValue,
 } from 'recoil'
+import '@/public/static/fonts/fonts.css'
 
 export default function App({
   Component,
