@@ -11,7 +11,7 @@ export default function CategoryList() {
         <div
           onClick={() => router.push(`/categories/${category.id}`)}
           key={category.id}
-          className="bg-white shadow-md px-4 py-2 rounded-lg text-2xl text-blue-500 hover:bg-blue-500 hover:text-white transition ease-in-out duration-200"
+          className="bg-blue-500 shadow-md px-4 py-2 rounded-lg text-2xl text-white hover:bg-blue-600 transition ease-in-out duration-200"
         >
           {category.name}
         </div>
