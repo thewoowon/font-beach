@@ -17,15 +17,17 @@ import { useRecoilState } from 'recoil'
 import { openModalState } from '@/states/states'
 import ModalImageBox from '@/components/ModalImageBox'
 import styled from '@emotion/styled'
+import { MainSwiper } from '@/components/MainSwiper'
 
 export default function Home() {
   const [temp, setTemp] = useState<Array<FontListItemType>>(dummy)
   const [opened, setOpened] = useRecoilState(openModalState)
   return (
     <Layout title="FontBeach - Home" description="Welcome to the FontBeach!">
-      <CategoryWrapper>
+      {/* <CategoryWrapper>
         <CategoryList></CategoryList>
-      </CategoryWrapper>
+      </CategoryWrapper> */}
+      {/* <MainSwiper></MainSwiper> */}
       <ImageFill src="/assets/beach.jpeg" className="flex"></ImageFill>
       <FilterWrapper>
         <FilterBox></FilterBox>
