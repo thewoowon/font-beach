@@ -16,4 +16,4 @@
 
 # Font Beach URL
 
-<a href="https://fontbeach.com">https://fontbeach.com</a>
+<a href="https://www.fontbeach.com/">https://www.fontbeach.com/</a>
