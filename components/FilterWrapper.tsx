@@ -4,7 +4,7 @@ export default function FilterWrapper({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex justify-center w-full rounded-full bg-zinc-50 border-2 border-blue-500 py-5 my-5 px-10">
+    <div className="flex justify-center w-full rounded-full shadow-md py-5 my-5 px-10 dark:bg-white">
       {children}
     </div>
   )
