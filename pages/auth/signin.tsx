@@ -101,10 +101,10 @@ export default function SignIn({
               className="relative text-5xl"
               style={{ fontFamily: 'Kashie-Mercy' }}
             >
-              LoveKong Stained Glass
+              Font Beach
             </div>
             <div className="relative font-sans-kr-light text-xl py-3">
-              러브콩 스테인드 글라스
+              폰트의 바다로 떠나 볼까요?
             </div>
             <div className="text-xl">
               안녕하세요! {session.user?.name}님 😆😆😆
@@ -201,7 +201,7 @@ export default function SignIn({
             >
               <span className="px-2 font-bold">NAVER 로그인</span>
             </ButtonBig>
-            <div className="flex justify-center items-center">
+            {/* <div className="flex justify-center items-center">
               아직 회원이 아니신가요?
               <Link
                 className="text-blue-500 px-2 my-4 border-b-blue-500 hover:border-b "
@@ -209,7 +209,7 @@ export default function SignIn({
               >
                 회원가입하기
               </Link>
-            </div>
+            </div> */}
           </div>
         )}
       </div>
