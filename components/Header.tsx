@@ -70,9 +70,9 @@ export default function Header() {
           <ThemeSwitch></ThemeSwitch>
         </div>
         <div
-          className="cursor-pointer mr-2 font-semibold text-xs xs:text-sm flex justify-center items-center px-2 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200 ease-in-out"
+          className="cursor-pointer mr-2 font-semibold text-xs xs:text-sm flex justify-center items-center px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200 ease-in-out"
           onClick={() => {
-            router.push('/cart')
+            router.push('/upload')
           }}
         >
           업로드
