@@ -45,14 +45,16 @@ export default function FontListItem({
         <div className="flex justify-between dark:text-black">
           <div>
             <span className="text-lg font-bold">{author}</span>님의{' '}
-            <span className="text-xl text-black font-light">{name}</span>
+            <span className="text-2xl text-black font-regular text-zinc-500">
+              {name}
+            </span>
           </div>
           <div className="flex">
-            <div className="flex justify-center items-center ml-5 px-2 bg-black rounded-md text-white font-semibold">
+            <div className="flex justify-center items-center ml-5 text-black font-semibold">
               {createdAt}
             </div>
-            <div className="flex justify-center items-center ml-5 px-2 bg-black rounded-md text-white font-semibold">{`${
-              commerce ? 'Commercial Use!' : 'Only Personal Use!'
+            <div className="flex justify-center items-center ml-5 text-black font-semibold">{`${
+              commerce ? '상업용 사용가능!' : '개인적 용도로만!'
             }`}</div>
           </div>
         </div>
@@ -63,14 +65,15 @@ export default function FontListItem({
             readOnly={false}
             size={textSize}
             name={name}
+            fontFamily={code}
           >
-            {textInput == '' ? '폰트를 입력해주세요!' : textInput}
+            {textInput == '' ? '텍스트를 입력해주세요!' : textInput}
           </FontListItemText>
           <div className="flex gap-5 my-5">
             <div
               onClick={() => {
+                setFontSelected(code)
                 setOpened(true)
-                setFontSelected(name)
               }}
               className="flex justify-center items-center shadow-md bg-white p-2 rounded-full hover:bg-zinc-100 transition duration-200 ease-in-out cursor-pointer"
             >
@@ -99,11 +102,12 @@ const FontListItemText = styled.div<{
   readOnly: boolean
   size: number
   name: string
+  fontFamily: string
 }>`
   ${(props) =>
     props.readOnly
       ? ''
-      : `font-family:${props.name};font-size:${props.size}px;color:${props.color};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;`}
+      : `font-family:${props.fontFamily};font-size:${props.size}px;color:${props.color};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;`}
 `
 
 const FontListBoxWrapper = styled.div<{
