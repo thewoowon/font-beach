@@ -1,4 +1,5 @@
 import '@/styles/globals.css'
+import '@/styles/utils.css'
 import { Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
@@ -73,9 +74,9 @@ export default function App({
             />
             <Header></Header>
             <Component {...pageProps} />
-            <div className="bg-zinc-100 h-56 flex flex-col justify-center items-center">
-              <div className="flextext-lg">100 +</div>
-              <div>FREE FONTS</div>
+            <div className="bg-black h-56 flex flex-col justify-center items-center">
+              <div className="text-4xl font-bold text-white">50 +</div>
+              <div className="text-2xl text-white">FREE FONTS</div>
             </div>
             <Footer></Footer>
             <Toaster></Toaster>

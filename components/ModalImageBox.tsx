@@ -30,16 +30,17 @@ export default function ModalImageBox() {
   const [backgroundColor, setBackgroundColor] =
     useRecoilState(backgroundColorState)
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const canvasDivRef = useRef<HTMLDivElement>(null)
   const [linkText, setLinkText] = useState('')
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (canvas) {
-      canvas.width = textSize * textInput.length * 0.9
-      canvas.height = textSize * 1.2
+      canvas.width = canvasDivRef.current?.clientWidth || 0
+      canvas.height = canvasDivRef.current?.clientHeight || 0
       const context = canvas.getContext('2d')
       if (context) {
-        context.font = `${textSize}px ${'MapoDacapo'}`
+        context.font = `${textSize}px ${fontSelected}`
         context.fillStyle = fontColor
         context.strokeStyle = backgroundColor
         context.fillText(textInput, 0, textSize)
@@ -70,14 +71,12 @@ export default function ModalImageBox() {
           readOnly={false}
           size={textSize}
           name={fontSelected}
+          code={fontSelected}
+          ref={canvasDivRef}
         >
-          {textInput == '' ? '폰트를 입력해주세요!' : textInput}
+          {textInput == '' ? '텍스트를 입력해주세요!' : textInput}
         </FontListItemText>
-        <canvas
-          ref={canvasRef}
-          style={{ display: 'none' }}
-          width={600}
-        ></canvas>
+        <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
       </div>
       <div className="flex justify-center">
         <ModalButtonBackground className="mx-1 px-6 py-3 bg-black rounded-full text-white font-semibold text-lg transition ease-in-out duration-200 hover:opacity-80">
@@ -118,11 +117,12 @@ const FontListItemText = styled.div<{
   readOnly: boolean
   size: number
   name: string
+  code: string
 }>`
   ${(props) =>
     props.readOnly
       ? ''
-      : `background-color:${props.backgroundColor};font-family:${props.name};font-size:${props.size}px;color:${props.color};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;`}
+      : `background-color:${props.backgroundColor};font-family:${props.code};font-size:${props.size}px;color:${props.color};overflow:hidden;white-space:nowrap;text-overflow:ellipsis;`}
 `
 
 const ModalButtonBackground = styled.button`

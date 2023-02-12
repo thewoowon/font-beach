@@ -22,7 +22,7 @@ const openModalState = atom({
 
 const textInputState = atom({
   key: 'textInputState',
-  default: '',
+  default: '텍스트를 입력해주세요!',
 })
 
 const fontSelectedState = atom({
