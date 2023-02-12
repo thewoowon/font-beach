@@ -18,6 +18,48 @@ const transformer: Record<'date' | 'bigint', ValueTransformer> = {
   },
 }
 
+@Entity({ name: 'fonts' })
+export class FontEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id!: string
+
+  @Column()
+  name!: string
+
+  @Column({ type: 'varchar', nullable: true })
+  description!: string
+
+  @Column({ type: 'varchar', nullable: true })
+  image!: string
+
+  @Column()
+  author!: string
+
+  @Column({ transformer: transformer.date })
+  createdAt!: string
+
+  @Column()
+  commerce!: boolean
+
+  @Column({ type: 'varchar', nullable: false })
+  code!: string
+
+  @Column({ type: 'varchar', nullable: true })
+  license!: string | null
+
+  @Column({ type: 'varchar', nullable: true })
+  licenseUrl!: string | null
+
+  @Column({ type: 'varchar', nullable: true })
+  licenseType!: string | null
+
+  @Column({ type: 'varchar', nullable: true })
+  licensePrice!: string | null
+
+  @Column({ type: 'varchar', nullable: true })
+  licenseCurrency!: string | null
+}
+
 @Entity({ name: 'users' })
 export class UserEntity {
   @PrimaryGeneratedColumn('uuid')

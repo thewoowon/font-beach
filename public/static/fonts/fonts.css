@@ -1,6 +1,43 @@
+
+/* 다카포체 / 마포구 */
 @font-face {
     font-family: 'MapoDacapo';
     src: url('MapoDacapo.otf') format('opentype');
     font-weight: normal;
+    font-style: normal;
+}
+/* 땅스부대찌개 / (주)티에스푸드 */
+@font-face {
+    font-family: 'TTTtangsbudaejjigaeB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/TTTtangsbudaejjigaeB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+/* 생거진천체 / 진천군 */
+@font-face {
+    font-family: 'SaenggeoJincheon';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/SaenggeoJincheon.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/* 교보문고 손글씨 성지영 / 교보문고 */
+@font-face {
+    font-family: 'KyoboHandwriting2021sjy';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KyoboHandwriting2021sjy.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/* 코레일 둥근고딕 / 코레일 */
+@font-face {
+    font-family: 'KorailRoundGothicBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KorailRoundGothicBold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+/* 한국기계연구원 / 한국기계연구원 */
+@font-face {
+    font-family: 'KIMM_Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2') format('woff2');
+    font-weight: 700;
     font-style: normal;
 }
