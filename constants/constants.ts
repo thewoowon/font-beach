@@ -3,144 +3,22 @@ import { FontListItemType } from '@/types/fonts'
 
 export const temptation = []
 
-export const dummy: FontListItemType[] = [
-  {
-    id: 1,
-    name: 'Noto Sans KR',
-    description: '노토 산스체',
-    image: '/assets/logo.png',
-    author: 'Google',
-    createdAt: '2023-01-15',
-    commerce: true,
-    code: 'Noto Sans KR',
-  },
-  {
-    id: 2,
-    name: '땅스부대찌개체',
-    description: '땅스부대찌개체',
-    image: '/assets/logo.png',
-    author: '(주)티에스푸드',
-    createdAt: '2023-02-12',
-    commerce: true,
-    code: 'TTTtangsbudaejjigaeB',
-  },
-  {
-    id: 3,
-    name: '생거진천체',
-    description: '생거진천체',
-    image: '/assets/logo.png',
-    author: '진천군',
-    createdAt: '2023-02-12',
-    commerce: true,
-    code: 'SaenggeoJincheon',
-  },
-  {
-    id: 4,
-    name: '교보문고 손글씨 성지영체',
-    description: '교보문고 손글씨 성지영체',
-    image: '/assets/logo.png',
-    author: '교보문고',
-    createdAt: '2023-02-12',
-    commerce: true,
-    code: 'KyoboHandwriting2021sjy',
-  },
-  {
-    id: 5,
-    name: '코레일 둥근고딕체',
-    description: '코레일 둥근고딕',
-    image: '/assets/logo.png',
-    author: '코레일',
-    createdAt: '2023-02-12',
-    commerce: true,
-    code: 'KorailRoundGothicBold',
-  },
-  {
-    id: 6,
-    name: '한국기계연구원체',
-    description: '한국기계연구원',
-    image: '/assets/logo.png',
-    author: '한국기계연구원',
-    createdAt: '2023-02-12',
-    commerce: true,
-    code: 'KIMM_Bold',
-  },
-  {
-    id: 7,
-    name: 'MapoDacapo',
-    description: '마포구',
-    image: '/assets/logo.png',
-    author: '마포구',
-    createdAt: '2023-02-12',
-    commerce: true,
-    code: 'MapoDacapo',
-  },
-  // {
-  //   id: 8,
-  //   name: 'Noto Sans KR',
-  //   description: 'sans-serif',
-  //   image: '/assets/logo.png',
-  //   author: 'google',
-  //   createdAt: '2021-01-01',
-  //   commerce: true,
-  //   code: 'Noto Sans KR',
-  // },
-  // {
-  //   id: 9,
-  //   name: 'Noto Sans KR',
-  //   description: 'sans-serif',
-  //   image: '/assets/logo.png',
-  //   author: 'google',
-  //   createdAt: '2021-01-01',
-  //   commerce: true,
-  //   code: 'Noto Sans KR',
-  // },
-  // {
-  //   id: 10,
-  //   name: 'Noto Sans KR',
-  //   description: 'sans-serif',
-  //   image: '/assets/logo.png',
-  //   author: 'google',
-  //   createdAt: '2021-01-01',
-  //   commerce: true,
-  //   code: 'Noto Sans KR',
-  // },
+export const TAKE = 12
+
+export const FITERS = [
+  { label: '추천순', value: 'like' },
+  { label: '다운로드순', value: 'download' },
+  { label: '조회순', value: 'view' },
 ]
 
-export const Categories: CategoryType[] = [
-  {
-    id: '1',
-    name: '최신',
-    slug: 'font',
-    description: '최신 폰트',
-    image: '/images/categories/font.png',
-    createdAt: '2021-01-01',
-    updatedAt: '2021-01-01',
-  },
-  {
-    id: '2',
-    name: '브랜드',
-    slug: 'theme',
-    description: '브랜드별 인기 폰트',
-    image: '/images/categories/theme.png',
-    createdAt: '2021-01-01',
-    updatedAt: '2021-01-01',
-  },
-  {
-    id: '3',
-    name: '트렌드',
-    slug: 'font',
-    description: '요즘 트렌드를 반영한 폰트',
-    image: '/images/categories/font.png',
-    createdAt: '2021-01-01',
-    updatedAt: '2021-01-01',
-  },
-  {
-    id: '4',
-    name: '연령순',
-    slug: 'theme',
-    description: '연령별 인기 폰트',
-    image: '/images/categories/theme.png',
-    createdAt: '2021-01-01',
-    updatedAt: '2021-01-01',
-  },
-]
+export const getOrderBy = (orderBy?: string) => {
+  return orderBy
+    ? orderBy === 'like'
+      ? { orderBy: { like: 'desc' } }
+      : orderBy === 'download'
+      ? { orderBy: { download: 'desc' } }
+      : orderBy === 'view'
+      ? { orderBy: { view: 'desc' } }
+      : { orderBy: { like: 'desc' } }
+    : undefined
+}

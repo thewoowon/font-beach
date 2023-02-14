@@ -7,6 +7,8 @@ import * as bcrypt from 'bcrypt'
 import { TypeORMLegacyAdapter } from '@next-auth/typeorm-legacy-adapter'
 import * as entities from 'lib/entities'
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import prisma from '../../../lib/prismadb'
 
 export interface CustomDefaultSession {
   user?: {
@@ -19,20 +21,7 @@ export interface CustomDefaultSession {
 }
 
 export const authOptions: NextAuthOptions = {
-  adapter: TypeORMLegacyAdapter(
-    {
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'Ww940706!!',
-      database: 'fontBeach',
-      namingStrategy: new SnakeNamingStrategy(),
-      synchronize: true,
-      logging: true, // process.env.NODE_ENV === "development",
-    },
-    { entities }
-  ),
+  adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({

@@ -7,7 +7,7 @@ const nextConfig = {
     emotion: true,
   },
   images: {
-    domains: ['ssl.pstatic.net', 'k.kakaocdn.net'],
+    domains: ['ssl.pstatic.net', 'k.kakaocdn.net', 'lh3.googleusercontent.com'],
   },
 }
 

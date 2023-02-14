@@ -1,5 +1,5 @@
 export type FontListItemType = {
-  id: number
+  id: string
   name: string
   author: string
   description: string
