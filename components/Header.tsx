@@ -31,7 +31,7 @@ export default function Header() {
   useEffect(() => setMounted(true), [])
 
   return (
-    <header className="bg-white dark:bg-zinc-800 fixed top-0 left-0 right-0 z-50 py-5 border-b border-blue-500 dark:border-white">
+    <header className="bg-white dark:bg-zinc-800 fixed top-0 left-0 right-0 z-50 py-5 border-b border-zinc-200 dark:border-white">
       <div
         className="m-auto flex h-12 items-center w-full"
         style={{ maxWidth: '1080px' }}
@@ -70,9 +70,9 @@ export default function Header() {
               onClick={() => {
                 router.push(`/search/${search}`)
               }}
-              className="mx-2 cursor-pointer mr-2 px-4 py-2 font-semibold text-xs xs:text-sm flex justify-center items-center bg-black text-white rounded-md hover:bg-blue-600 transition duration-200 ease-in-out"
+              className="mx-2 cursor-pointer mr-2 px-4 py-2 font-semibold text-xs xs:text-sm flex justify-center items-center bg-black dark:bg-zinc-500 text-white rounded-md hover:bg-zinc-600 transition duration-200 ease-in-out"
             >
-              검색
+              Search
             </button>
           </div>
         </div>
@@ -81,12 +81,12 @@ export default function Header() {
           <ThemeSwitch></ThemeSwitch>
         </div>
         <div
-          className="cursor-pointer mr-2 px-4 py-2 font-semibold text-xs xs:text-sm flex justify-center items-center bg-black text-white rounded-md hover:bg-blue-600 transition duration-200 ease-in-out"
+          className="cursor-pointer mr-2 px-4 py-2 font-semibold text-xs xs:text-sm flex justify-center items-center bg-black dark:bg-zinc-500 text-white rounded-md hover:bg-zinc-600 transition duration-200 ease-in-out"
           onClick={() => {
             router.push('/upload')
           }}
         >
-          업로드
+          Upload
         </div>
         {session ? (
           <div className="mr-4 flex justify-center items-center relative">
@@ -102,12 +102,12 @@ export default function Header() {
           </div>
         ) : (
           <div
-            className="cursor-pointer text-xs xs:text-sm flex justify-center items-center px-2 hover:bg-zinc-50 transition duration-200 ease-in-out h-full"
+            className="cursor-pointer mr-2 px-4 py-2 font-semibold text-xs xs:text-sm flex justify-center items-center bg-black dark:bg-zinc-500 text-white rounded-md hover:bg-zinc-600 transition duration-200 ease-in-out"
             onClick={() => {
               signIn()
             }}
           >
-            로그인 / 회원가입
+            Sign in
           </div>
         )}
       </div>

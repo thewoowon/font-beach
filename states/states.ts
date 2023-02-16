@@ -20,6 +20,11 @@ const openModalState = atom({
   default: false,
 })
 
+const openModalTypeState = atom({
+  key: 'openModalTypeState',
+  default: 'image',
+})
+
 const textInputState = atom({
   key: 'textInputState',
   default: '텍스트를 입력해주세요!',
@@ -40,6 +45,7 @@ export {
   backgroundColorState,
   textSizeState,
   openModalState,
+  openModalTypeState,
   textInputState,
   fontSelectedState,
   commerceState,

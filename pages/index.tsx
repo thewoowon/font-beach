@@ -11,7 +11,11 @@ import FilterBox from '@/components/FilterBox'
 import { FITERS, TAKE } from '@/constants/constants'
 import { Loader, Modal, Pagination } from '@mantine/core'
 import { useRecoilState } from 'recoil'
-import { commerceState, openModalState } from '@/states/states'
+import {
+  commerceState,
+  openModalState,
+  openModalTypeState,
+} from '@/states/states'
 import ModalImageBox from '@/components/ModalImageBox'
 import styled from '@emotion/styled'
 import { MainSwiper } from '@/components/MainSwiper'
@@ -20,10 +24,12 @@ import { useQuery } from '@tanstack/react-query'
 import useDebounce from '@/hooks/useDebounce'
 import useGetFonts from '@/hooks/useGetFonts'
 import useGetFontsCount from '@/hooks/useGetFontsCount'
+import ModalConfirmBox from '@/components/ModalConfirmBox'
 
 export default function Home() {
   //const [fonts, setFonts] = useState<Fonts[]>([])
-  const [opened, setOpened] = useRecoilState(openModalState)
+  const [openModal, setOpenModal] = useRecoilState(openModalState)
+  const [openModalType, setOpenModalType] = useRecoilState(openModalTypeState)
   const [commerce, setCommerce] = useRecoilState(commerceState)
   const [skip, setSkip] = useState(0)
   const [activePage, setPage] = useState(1)
@@ -44,6 +50,10 @@ export default function Home() {
         <CategoryList></CategoryList>
       </CategoryWrapper> */}
       {/* <MainSwiper></MainSwiper> */}
+      <div className="flex justify-center font-bold text-center items-center bg-black rounded-lg px-4 py-6 text-white text-2xl mb-5">
+        It provides image download of Korean fonts.<br></br>
+        Everything is FREE!
+      </div>
       <ImageFill src="/assets/beach.jpeg" className="flex"></ImageFill>
       <FilterWrapper>
         <FilterBox></FilterBox>
@@ -98,14 +108,14 @@ export default function Home() {
         </div>
       </FontListBox>
       <Modal
-        opened={opened}
+        opened={openModal}
         onClose={() => {
-          setOpened(false)
+          setOpenModal(false)
         }}
         centered
         size="xl"
       >
-        <ModalImageBox />
+        {openModalType === 'image' ? <ModalImageBox /> : <ModalConfirmBox />}
       </Modal>
     </Layout>
   )
@@ -121,4 +131,8 @@ const ImageFill = styled.div<{ src: string }>`
   border-radius: 10px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease-in-out;
+`
+
+const TopBanner = styled.div`
+  font-family: 'Noto Sans KR', sans-serif;
 `

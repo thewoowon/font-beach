@@ -14,6 +14,7 @@ import { Checkbox } from '@mantine/core'
 import { IconRefresh, IconShare } from '@tabler/icons'
 import { BackgroundColorPallete } from './BackgroundColorPallete'
 import { FontColorPallete } from './FontColorPallete'
+import { useRouter } from 'next/router'
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -65,6 +66,7 @@ export default function FilterBox() {
   const [textSize, setTextSize] = useRecoilState(textSizeState)
   const [textInput, setTextInput] = useRecoilState(textInputState)
   const [commerce, setCommerce] = useRecoilState(commerceState)
+  const router = useRouter()
   return (
     <div className="w-full flex justify-between">
       <div className="flex gap-5">
@@ -133,16 +135,26 @@ export default function FilterBox() {
           />
         </div>
         <div className="h-full flex items-center justify-center">
-          <div className="p-2 bg-white rounded-full shadow-md hover:bg-zinc-300">
+          <div className="p-2 bg-white rounded-full shadow-md hover:bg-zinc-100">
             <IconRefresh
               className="hover:animate-spin"
               stroke={2}
               color={'#3b82f6'}
+              onClick={() => {
+                router.reload()
+              }}
             ></IconRefresh>
           </div>
         </div>
         <div className="h-full flex items-center justify-center">
-          <IconShare stroke={2}></IconShare>
+          <div className="p-2 bg-white rounded-full shadow-md hover:bg-zinc-100">
+            <IconShare
+              stroke={2}
+              onClick={() => {
+                alert('아직 준비중입니다. :)')
+              }}
+            ></IconShare>
+          </div>
         </div>
       </div>
     </div>

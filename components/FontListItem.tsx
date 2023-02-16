@@ -13,9 +13,12 @@ import {
   fontColorState,
   fontSelectedState,
   openModalState,
+  openModalTypeState,
   textInputState,
   textSizeState,
 } from '@/states/states'
+import { useSession } from 'next-auth/react'
+import { Router, useRouter } from 'next/router'
 
 export default function FontListItem({
   id,
@@ -27,13 +30,17 @@ export default function FontListItem({
   commerce,
   code,
 }: FontListItemType) {
+  const { data: session } = useSession()
   const [fontColor, setFontColor] = useRecoilState(fontColorState)
   const [backgroundColor, setBackgroundColor] =
     useRecoilState(backgroundColorState)
   const [textSize, setTextSize] = useRecoilState(textSizeState)
-  const [opened, setOpened] = useRecoilState(openModalState)
+  const [openModal, setOpenModal] = useRecoilState(openModalState)
+  const [openModalType, setOpenModalType] = useRecoilState(openModalTypeState)
   const [textInput, setTextInput] = useRecoilState(textInputState)
   const [fontSelected, setFontSelected] = useRecoilState(fontSelectedState)
+
+  const router = useRouter()
 
   return (
     <FontListItemBackground className="flex justify-center items-center my-5 rounded-lg p-2">
@@ -73,14 +80,23 @@ export default function FontListItem({
             <div
               onClick={() => {
                 setFontSelected(code)
-                setOpened(true)
+                setOpenModal(true)
+                setOpenModalType('image')
               }}
               className="flex justify-center items-center shadow-md bg-white p-2 rounded-full hover:bg-zinc-100 transition duration-200 ease-in-out cursor-pointer"
             >
               <IconPhoto stroke={1.3} size={40} color={'#3b82f6'}></IconPhoto>
             </div>
             <div className="flex justify-center items-center shadow-md bg-white p-2 rounded-full hover:bg-zinc-100 transition duration-200 ease-in-out cursor-pointer">
-              <IconPlus stroke={1.3} size={40} color={'#3b82f6'}></IconPlus>
+              <IconPlus
+                stroke={1.3}
+                size={40}
+                color={'#3b82f6'}
+                onClick={() => {
+                  session ? router.push(`/plus/${code}`) : setOpenModal(true)
+                  setOpenModalType('confirm')
+                }}
+              ></IconPlus>
             </div>
             <CloudDownloadIconBackground className="flex justify-center items-center shadow-md bg-green-500 p-2 rounded-full hover:bg-green-600 transition duration-200 ease-in-out cursor-pointer">
               <IconCloudDownload
