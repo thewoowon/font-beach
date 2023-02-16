@@ -30,6 +30,11 @@ const fontSelectedState = atom({
   default: 'Noto Sans KR',
 })
 
+const commerceState = atom({
+  key: 'commerceState',
+  default: false,
+})
+
 export {
   fontColorState,
   backgroundColorState,
@@ -37,4 +42,5 @@ export {
   openModalState,
   textInputState,
   fontSelectedState,
+  commerceState,
 }
