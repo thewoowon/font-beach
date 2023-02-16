@@ -1,6 +1,3 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
 import Layout from '@/components/Layout'
 import FontListBox from '@/components/FontListBox'
 import FontListItem from '@/components/FontListItem'
@@ -14,17 +11,20 @@ import FilterBox from '@/components/FilterBox'
 import { FITERS, TAKE } from '@/constants/constants'
 import { Loader, Modal, Pagination } from '@mantine/core'
 import { useRecoilState } from 'recoil'
-import { openModalState } from '@/states/states'
+import { commerceState, openModalState } from '@/states/states'
 import ModalImageBox from '@/components/ModalImageBox'
 import styled from '@emotion/styled'
 import { MainSwiper } from '@/components/MainSwiper'
 import { Fonts } from '@prisma/client'
 import { useQuery } from '@tanstack/react-query'
 import useDebounce from '@/hooks/useDebounce'
+import useGetFonts from '@/hooks/useGetFonts'
+import useGetFontsCount from '@/hooks/useGetFontsCount'
 
 export default function Home() {
   //const [fonts, setFonts] = useState<Fonts[]>([])
   const [opened, setOpened] = useRecoilState(openModalState)
+  const [commerce, setCommerce] = useRecoilState(commerceState)
   const [skip, setSkip] = useState(0)
   const [activePage, setPage] = useState(1)
   const [keyword, setKeyword] = useState<string>('')
@@ -32,32 +32,12 @@ export default function Home() {
     FITERS[0].value
   )
   const deboundecKeyword = useDebounce(keyword, 500)
-  const [commence, setCommence] = useState<boolean>(false)
-  const { data: fonts } = useQuery<{ data: Fonts[] }, unknown, Fonts[]>(
-    [
-      `/api/get-fonts?skip=${
-        TAKE * (activePage - 1)
-      }&take=${TAKE}&orderBy=${selectedFilter}&contains=${keyword}`,
-    ],
-    () =>
-      fetch(
-        `/api/get-fonts?skip=${
-          TAKE * (activePage - 1)
-        }&take=${TAKE}&orderBy=${selectedFilter}&contains=${keyword}`
-      ).then((res) => res.json()),
-    {
-      select: (data) => data.data,
-    }
+  const { data: fonts } = useGetFonts(
+    activePage,
+    selectedFilter ?? '',
+    deboundecKeyword
   )
-
-  const { data: total } = useQuery(
-    [`/api/get-fonts-count?contains=${deboundecKeyword}`],
-    () =>
-      fetch(`/api/get-fonts-count?contains=${deboundecKeyword}`)
-        .then((res) => res.json())
-        .then((data) => Math.ceil(data.data / TAKE))
-  )
-
+  const { data: total } = useGetFontsCount(deboundecKeyword, commerce)
   return (
     <Layout title="FontBeach - Home" description="Welcome to the FontBeach!">
       {/* <CategoryWrapper>
@@ -82,6 +62,9 @@ export default function Home() {
                 author: font.author ?? 'NO AUTHOR',
                 commerce: font.commerce ?? false,
                 code: font.code ?? 'NO CODE',
+              }
+              if (commerce === true && fontElement.commerce === true) {
+                return <FontListItem key={fontElement.id} {...fontElement} />
               }
               return <FontListItem key={fontElement.id} {...fontElement} />
             })
