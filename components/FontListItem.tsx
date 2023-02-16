@@ -54,7 +54,7 @@ export default function FontListItem({
               {createdAt}
             </div>
             <div className="flex justify-center items-center ml-5 text-black font-semibold">{`${
-              commerce ? '상업용 사용가능!' : '개인적 용도로만!'
+              commerce ? '상업용 사용 가능!' : '상업적 사용 불가!'
             }`}</div>
           </div>
         </div>

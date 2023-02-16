@@ -8,6 +8,7 @@ import {
   backgroundColorState,
   textSizeState,
   textInputState,
+  commerceState,
 } from 'states/states'
 import { Checkbox } from '@mantine/core'
 import { IconRefresh, IconShare } from '@tabler/icons'
@@ -63,6 +64,7 @@ export default function FilterBox() {
     useRecoilState(backgroundColorState)
   const [textSize, setTextSize] = useRecoilState(textSizeState)
   const [textInput, setTextInput] = useRecoilState(textInputState)
+  const [commerce, setCommerce] = useRecoilState(commerceState)
   return (
     <div className="w-full flex justify-between">
       <div className="flex gap-5">
@@ -123,10 +125,11 @@ export default function FilterBox() {
       <div className="flex gap-5">
         <div className="h-full flex items-center justify-center">
           <Checkbox
-            onChange={(e) => {
-              console.log('사용 가능')
+            value={commerce ? 'on' : 'off'}
+            label="상업적 사용"
+            onChange={() => {
+              setCommerce(!commerce)
             }}
-            label="상업적 용도 사용 여부"
           />
         </div>
         <div className="h-full flex items-center justify-center">

@@ -23,6 +23,7 @@ export default function Header() {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [toggle, setToggle] = useState(false)
+  const [search, setSearch] = useState<string>('')
   const clickProfile = () => {
     setToggle(!toggle)
   }
@@ -60,9 +61,19 @@ export default function Header() {
           </div>
           <div className="flex items-center">
             <input
-              className="bg-white text-black px-4 py-2 border rounded-full outline-none"
+              className="bg-white text-xs xs:text-sm text-black px-4 py-2 border border-black rounded-lg outline-none"
               placeholder="Search Engine"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             ></input>
+            <button
+              onClick={() => {
+                router.push(`/search/${search}`)
+              }}
+              className="mx-2 cursor-pointer mr-2 px-4 py-2 font-semibold text-xs xs:text-sm flex justify-center items-center bg-black text-white rounded-md hover:bg-blue-600 transition duration-200 ease-in-out"
+            >
+              검색
+            </button>
           </div>
         </div>
         <span className="m-auto"></span>
@@ -70,7 +81,7 @@ export default function Header() {
           <ThemeSwitch></ThemeSwitch>
         </div>
         <div
-          className="cursor-pointer mr-2 font-semibold text-xs xs:text-sm flex justify-center items-center px-2 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200 ease-in-out"
+          className="cursor-pointer mr-2 px-4 py-2 font-semibold text-xs xs:text-sm flex justify-center items-center bg-black text-white rounded-md hover:bg-blue-600 transition duration-200 ease-in-out"
           onClick={() => {
             router.push('/upload')
           }}
