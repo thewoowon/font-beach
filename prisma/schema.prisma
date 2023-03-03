@@ -68,13 +68,13 @@ model Fonts {
   name          String?
   url           String?
   description   String?
-  image         String?
+  image         String? @default("/assets/logo.png")
   author        String?
   createdAt     DateTime  @default(now())
-  commerce      Boolean?
+  commerce      Boolean? @default(true)
   code          String?
-  like          Int?
-  view          Int?
-  download      Int?
-  type          String?
+  like          Int? @default(0)
+  view          Int? @default(0)
+  download      Int? @default(0)
+  type          String? @default("free")
 }

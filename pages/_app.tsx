@@ -75,8 +75,8 @@ export default function App({
             <Header></Header>
             <Component {...pageProps} />
             <div className="bg-black h-56 flex flex-col justify-center items-center">
-              <div className="text-4xl font-bold text-white">50 +</div>
-              <div className="text-2xl text-white">FREE FONTS</div>
+              <div className="text-4xl font-bold text-white">100 +</div>
+              <div className="text-2xl text-white">FREE KOREAN FONTS</div>
             </div>
             <Footer></Footer>
             <Toaster></Toaster>

@@ -1,4 +1,3 @@
-import useCanvas from '@/hooks/useCanvas'
 import {
   backgroundColorState,
   fontColorState,
@@ -7,16 +6,30 @@ import {
   textSizeState,
 } from '@/states/states'
 import styled from '@emotion/styled'
-import { IconClipboard, IconClipboardCopy } from '@tabler/icons'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { IconClipboard } from '@tabler/icons'
+import axios from 'axios'
 import { useEffect, useRef, useState } from 'react'
 import { useRecoilState } from 'recoil'
 
 export default function ModalImageBox() {
+  const handleImageClipBoard = async (blob: Blob | null) => {
+    try {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          'image/png': blob ?? '',
+        }),
+      ])
+      alert('클립보드에 이미지가 복사되었습니다.')
+    } catch (e) {
+      console.log(e)
+      alert('복사에 실패하였습니다')
+    }
+  }
+
   const handleCopyClipBoard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text)
+
       alert('클립보드에 링크가 복사되었습니다.')
     } catch (e) {
       alert('복사에 실패하였습니다')
@@ -32,6 +45,8 @@ export default function ModalImageBox() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const canvasDivRef = useRef<HTMLDivElement>(null)
   const [linkText, setLinkText] = useState('')
+  const [blob, setBlob] = useState<Blob | null>(null)
+  const [cfImage, setCfImage] = useState('')
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -46,6 +61,23 @@ export default function ModalImageBox() {
         context.fillText(textInput, 0, textSize)
       }
       setLinkText(String(canvas.toDataURL()))
+      let uploadURL = ''
+      canvas.toBlob(async (blob) => {
+        setBlob(blob)
+        const uploadURL = await fetch('/api/get-url')
+          .then((res) => res.json())
+          .then((data) => data.data)
+
+        const file = new File([blob ?? ''], 'blob')
+        const form = new FormData()
+        form.append('file', file)
+        const image_url = await axios.post(uploadURL, form, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        setCfImage(String(image_url.data.result.variants[0]))
+      })
     }
   }, [])
   return (
@@ -79,8 +111,13 @@ export default function ModalImageBox() {
         <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
       </div>
       <div className="flex justify-center">
-        <ModalButtonBackground className="mx-1 px-6 py-3 bg-black rounded-full text-white font-semibold text-lg transition ease-in-out duration-200 hover:opacity-80">
-          클립보드에 복사
+        <ModalButtonBackground
+          onClick={() => {
+            handleImageClipBoard(blob)
+          }}
+          className="mx-1 px-6 py-3 bg-black rounded-full text-white font-semibold text-lg transition ease-in-out duration-200 hover:opacity-80"
+        >
+          클립보드에 이미지 복사
         </ModalButtonBackground>
         <a
           className="mx-1 px-6 py-3 bg-zinc-200 rounded-full font-semibold text-lg transition ease-in-out duration-200 hover:bg-zinc-300"
@@ -100,11 +137,11 @@ export default function ModalImageBox() {
               className="mx-2 cursor-pointer"
               color={'#3b82f6'}
               onClick={() => {
-                handleCopyClipBoard(tempLink)
+                handleCopyClipBoard(cfImage)
               }}
             ></IconClipboard>
           </div>
-          <div className="rounded-full px-5 py-2">{tempLink}</div>
+          <div className="rounded-full px-5 py-2">{cfImage}</div>
         </div>
       </div>
     </div>
